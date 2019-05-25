@@ -29,23 +29,24 @@ data.forEach(function(ufoSighting) {
 // getting a reference to the button on the page with the id property set to `filter`
 var filterField = d3.select("#filter-btn");
 
-filterField.on("click", function() {
-
-  // prevent the page from refreshing
-    d3.event.preventDefault();
-
-
 // getting a reference to the input element on the page
-    var inputField = d3.select("#datetime");
+var inputField = d3.select("#datetime");
 
-// get the value property og the input element
-    var inputValue = inputField.property("value");
+function changeHandler(){
+  // prevent the page from refreshing
+  d3.event.preventDefault();
 
-    console.log(inputValue);
-    console.log(table);
+  // get the value property og the input element
+  var inputValue = inputField.property("value");
+  console.log(inputValue);
 
-    var filteredData = tableData.filter(dateNav => dateNav.datetime === inputValue);
+  var filteredData = tableData.filter(ufoSighting => ufoSighting.datetime === inputValue)
+  console.log(filteredData);
 
-    console.log(filteredData);
+// set up event listener to enable click
+filterField.on("click", changeHandler);
 
-});
+// set up event listener to enable change
+inputField.on("change", changeHandler);
+
+};
